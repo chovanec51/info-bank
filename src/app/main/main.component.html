@@ -1,0 +1,17 @@
+
+<div clas="main-container">
+    <div class="left-container">
+        <button class="btn btn-success" (click)="onDummyAdd()">Add dummy Info</button>
+        <div *ngFor="let infoItem of infoItemList" class="card">
+            <div class="card-body clickable" (click)="onInfoItemClick(infoItem.id)">
+                <h5 class="card-title">{{ infoItem.header }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ infoItem.topic }}</h6>
+                <p class="card-text">{{ infoItem.summary }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="right-container">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
