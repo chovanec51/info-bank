@@ -1,1 +1,57 @@
-<p>info-create works!</p>
+<form #f="ngForm" (ngSubmit)="onCreate(f)">
+    <div class="form-group mb-3">
+        <label for="topic" class="form-label">Téma</label>
+        <select
+            id="topic"
+            name="topic"
+            [(ngModel)]="defaultTopic"
+            #topic="ngModel" 
+            class="form-select">
+                <option *ngFor="let topic of topicsList; index as i" 
+                    [value]="topic" 
+                    [label]="topics_cl[topic]" 
+                    [attr.selected]="i === 0">
+                </option>
+        </select>
+    </div>
+    <div class="form-group mb-3">
+        <label for="header" class="form-label">Nadpis</label>
+        <input 
+            required
+            minlength="3"
+            id="header"
+            name="header"
+            ngModel
+            #header="ngModel"
+            type="text" 
+            class="form-control">
+    </div>
+    <div class="form-group mb-3">
+        <label for="content" class="form-label">Obsah</label>
+        <textarea 
+            required
+            minlength="3"
+            rows="7"
+            id="content"
+            name="content"
+            ngModel
+            #content="ngModel"
+            class="form-control">
+        </textarea>
+    </div>
+    <div class="form-group mb-3">
+        <label for="summary" class="form-label">Súhrn</label>
+        <textarea 
+            required
+            minlength="3"
+            rows="2"
+            id="summary"
+            name="summary"
+            ngModel
+            #summary="ngModel"
+            class="form-control">
+        </textarea>
+    </div>
+    <button class="btn btn-success">Vytvoriť</button>
+    <p>{{ f.value | json }}</p>
+</form>

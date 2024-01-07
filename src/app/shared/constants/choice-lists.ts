@@ -3,3 +3,5 @@ export const TOPIC_CHOICE_LIST = {
     'psychology': "Psychológia",
     'other': "Ostatné"
 }
+
+export const TOPIC_LIST = ['coding', 'psychology', 'other']
