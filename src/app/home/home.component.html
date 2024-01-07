@@ -1,1 +1,9 @@
-<p>home works!</p>
+<div class="container">
+    <div *ngFor="let infoItem of infoItemList; index as i" class="card">
+        <div class="card-body clickable" (click)="onInfoItemClick(i)">
+            <h5 class="card-title">{{ infoItem.header }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ infoItem.topic }}</h6>
+            <p class="card-text">{{ infoItem.summary }}</p>
+        </div>
+    </div>
+</div>

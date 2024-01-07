@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { resolveAllInfo, resolveInfoByTopic } from './shared/constants/info-data.resolver';
 
 export const routes: Routes = [
     {
@@ -9,12 +10,22 @@ export const routes: Routes = [
     },
     {
         path: 'home',
-        component: HomeComponent
+        component: HomeComponent,
+        resolve: [resolveAllInfo]
     },
     {
         path: 'info/:topic',
         loadComponent: () => import('./main/main.component').then(comp => comp.MainComponent),
-        loadChildren: () => import('./main/main.routes').then(route => route.routes)
+        loadChildren: () => import('./main/main.routes').then(route => route.routes),
+        resolve: [resolveInfoByTopic]
+    },
+    {
+        path: 'login',
+        redirectTo: 'info-create'
+    },
+    {
+        path: 'info-create',
+        loadComponent: () => import('./info-create/info-create.component').then(comp => comp.InfoCreateComponent)
     },
     {
         path: '**',

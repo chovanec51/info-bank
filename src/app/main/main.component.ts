@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { RouterOutlet, Router, ActivatedRoute, RouterLink } from '@angular/router';
+import { RouterOutlet, ActivatedRoute, RouterLink } from '@angular/router';
 import { InfoPanelComponent } from './info-panel/info-panel.component';
 import { Subscription } from 'rxjs';
 import { InfoItem } from '../shared/models/info-item.model';
@@ -14,29 +14,22 @@ import { InfoService } from '../shared/services/info.service';
   styleUrl: './main.component.css'
 })
 export class MainComponent implements OnInit, OnDestroy {
-  private topic: string;
   private routeSub: Subscription;
-  infoItemList: InfoItem[] = [
-    new InfoItem('Programovanie', 'Angular Universal', 'Angular universal je rozsirenie pre angular, ktore umoznuje vyuzit SSR.', 'SSR rozsirenie', 0)
-  ];
+  infoItemList: InfoItem[] = [];
 
-  constructor(private route: ActivatedRoute, private router: Router, private infoService: InfoService) {}
+  constructor(private route: ActivatedRoute, private infoService: InfoService) {}
 
   ngOnInit(): void {
-    this.routeSub = this.route.params.subscribe({
-      next: params => {
-        this.topic = params['topic'];
+    this.routeSub = this.route.data.subscribe({
+      next: resolvedData => {
+        this.infoItemList = resolvedData ? resolvedData[0] : [];
       }
     });
   }
 
   onDummyAdd() {
-    const item: InfoItem = new InfoItem('Programovanie', 'Angular Universal', 'Angular universal je rozsirenie pre angular, ktore umoznuje vyuzit SSR.', 'SSR rozsirenie', 0);
+    const item: InfoItem = new InfoItem('coding', 'Angular Universal', 'Angular universal je rozsirenie pre angular, ktore umoznuje vyuzit SSR.', 'SSR rozsirenie');
     this.infoService.create(item);
-  }
-
-  onInfoItemClick(id: any) {
-    this.router.navigate([id], {relativeTo: this.route});
   }
 
   ngOnDestroy() {

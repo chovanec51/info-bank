@@ -2,14 +2,32 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AlertComponent } from './shared/alert/alert.component';
+import { InfoService } from './shared/services/info.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, NavbarComponent],
+  imports: [CommonModule, RouterOutlet, NavbarComponent, AlertComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'info-bank';
+  errorMessage = '';
+  private infoSub: Subscription;
+  
+  constructor(private infoService: InfoService) {}
+
+  ngOnInit() {
+    this.infoSub = this.infoService.infoFetchError.subscribe({
+      next: errMessage => {
+        this.errorMessage = errMessage;
+      }
+    })
+  } 
+
+  ngOnDestroy() {
+    this.infoSub.unsubscribe();
+  }
 }

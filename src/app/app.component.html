@@ -1,4 +1,5 @@
 <app-navbar></app-navbar>
+<app-alert *ngIf="errorMessage.length > 0" [message]="errorMessage"></app-alert>
 <div class="main-container">
     <router-outlet></router-outlet>
 </div>
