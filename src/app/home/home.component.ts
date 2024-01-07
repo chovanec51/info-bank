@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { InfoItem } from '../shared/models/info-item.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { InfoService } from '../shared/services/info.service';
-import { NgFor } from '@angular/common';
+import { NgClass, NgFor } from '@angular/common';
+import { InfoPanelComponent } from '../main/info-panel/info-panel.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, InfoPanelComponent, NgClass],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -16,7 +17,7 @@ export class HomeComponent {
   private routeSub: Subscription;
   infoItemList: InfoItem[] = [];
 
-  constructor(private route: ActivatedRoute, private router: Router, private infoService: InfoService) {}
+  constructor(private route: ActivatedRoute, private infoService: InfoService) {}
 
   ngOnInit(): void {
     this.routeSub = this.route.data.subscribe({
@@ -24,11 +25,6 @@ export class HomeComponent {
         this.infoItemList = resolvedData ? resolvedData[0] : [];
       }
     });
-  }
-
-  onDummyAdd() {
-    const item: InfoItem = new InfoItem('coding', 'Angular Universal', 'Angular universal je rozsirenie pre angular, ktore umoznuje vyuzit SSR.', 'SSR rozsirenie');
-    this.infoService.create(item);
   }
 
   ngOnDestroy() {

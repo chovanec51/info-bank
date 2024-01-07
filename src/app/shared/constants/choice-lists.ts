@@ -1,4 +1,4 @@
-export const TOPIC_CHOICE_LIST_ENG = {
+export const TOPIC_CHOICE_LIST = {
     'coding': 'Programovanie',
     'psychology': "Psychológia",
     'other': "Ostatné"

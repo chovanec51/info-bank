@@ -1,7 +1,7 @@
-<div class="card">
+<div class="card mb-2">
     <div class="card-body clickable" (click)="onInfoItemClick()">
         <h5 class="card-title">{{ infoItem.header }}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{ infoItem.topic }}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">{{ topic_cl[infoItem.topic] }}</h6>
         <p class="card-text">{{ infoItem.summary }}</p>
     </div>
 </div>

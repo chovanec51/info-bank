@@ -1,6 +1,5 @@
 <div clas="main-container">
     <div class="left-container">
-        <button class="btn btn-success" (click)="onDummyAdd()">Add dummy Info</button>
         <app-info-panel 
             *ngFor="let infoItem of infoItemList; index as i" 
             [infoItem]="infoItem"

@@ -27,11 +27,6 @@ export class MainComponent implements OnInit, OnDestroy {
     });
   }
 
-  onDummyAdd() {
-    const item: InfoItem = new InfoItem('coding', 'Angular Universal', 'Angular universal je rozsirenie pre angular, ktore umoznuje vyuzit SSR.', 'SSR rozsirenie');
-    this.infoService.create(item);
-  }
-
   ngOnDestroy() {
     this.routeSub.unsubscribe();
   }

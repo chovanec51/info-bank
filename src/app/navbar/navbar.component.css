@@ -1,0 +1,10 @@
+.active {
+    font-weight: bold;
+}
+
+.logo {
+    font-size: 1.4em;
+    font-family:'Segoe UI';
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.8);
+}
