@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { resolveAllInfo, resolveInfoByTopic } from './shared/constants/info-data.resolver';
+import { authGuard } from './shared/constants/auth.guard';
 
 export const routes: Routes = [
     {
@@ -21,11 +22,12 @@ export const routes: Routes = [
     },
     {
         path: 'login',
-        redirectTo: 'info-create'
+        loadComponent: () => import('./login/login.component').then(comp => comp.LoginComponent)
     },
     {
         path: 'info-create',
-        loadComponent: () => import('./info-create/info-create.component').then(comp => comp.InfoCreateComponent)
+        loadComponent: () => import('./info-create/info-create.component').then(comp => comp.InfoCreateComponent),
+        canActivate: [authGuard]
     },
     {
         path: '**',

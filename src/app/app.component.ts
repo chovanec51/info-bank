@@ -5,6 +5,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AlertComponent } from './shared/alert/alert.component';
 import { InfoService } from './shared/services/info.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from './shared/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -17,14 +18,15 @@ export class AppComponent {
   errorMessage = '';
   private infoSub: Subscription;
   
-  constructor(private infoService: InfoService) {}
+  constructor(private infoService: InfoService, private authService: AuthService) {}
 
   ngOnInit() {
     this.infoSub = this.infoService.infoFetchError.subscribe({
       next: errMessage => {
         this.errorMessage = errMessage;
       }
-    })
+    });
+    this.authService.autoLogin();
   } 
 
   ngOnDestroy() {

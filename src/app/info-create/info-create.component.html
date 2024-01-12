@@ -52,6 +52,5 @@
             class="form-control">
         </textarea>
     </div>
-    <button class="btn btn-success">Vytvoriť</button>
-    <p>{{ f.value | json }}</p>
+    <button class="btn btn-success" [disabled]="f.invalid">Vytvoriť</button>
 </form>

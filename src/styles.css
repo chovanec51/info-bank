@@ -10,3 +10,16 @@
 .clickable:hover {
     background-color: rgba(0, 0, 0, 0.2);
 }
+
+.input.ng-invalid.ng-touched {
+    border: 2px darkred solid;
+}
+
+.textarea.ng-invalid.ng-touched {
+    border: 2px darkred solid;
+}
+
+.form-label {
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.75);
+}
