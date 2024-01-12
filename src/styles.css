@@ -11,12 +11,12 @@
     background-color: rgba(0, 0, 0, 0.2);
 }
 
-.input.ng-invalid.ng-touched {
-    border: 2px darkred solid;
+input.ng-invalid.ng-touched {
+    border: 2px red solid;
 }
 
-.textarea.ng-invalid.ng-touched {
-    border: 2px darkred solid;
+textarea.ng-invalid.ng-touched {
+    border: 2px red solid;
 }
 
 .form-label {

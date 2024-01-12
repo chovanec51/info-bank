@@ -27,5 +27,6 @@ export class InfoCreateComponent {
       form.value['summary']
     );
     this.infoService.create(infoItem);
+    form.resetForm({topic: 'coding'});
   }
 }

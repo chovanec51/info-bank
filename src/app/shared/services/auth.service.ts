@@ -1,15 +1,16 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
 import { AuthResponse } from '../models/auth-response.model';
 import { AuthRequest } from '../models/auth-request.model';
 import { AuthUser } from '../models/auth-user.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAavccR7nyWM1622UmfkCnlWAAq0CYBwjQ";
+  private url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key="+environment.api_key;
   authenticatedUser: BehaviorSubject<AuthUser> = new BehaviorSubject(null);
   private _logoutTimeout: any;
 
@@ -38,7 +39,6 @@ export class AuthService {
   logout() {
     const storedUser: string = localStorage.getItem('authUser');
     if (storedUser) {
-      const authUser: AuthUser = JSON.parse(storedUser);
       clearTimeout(this._logoutTimeout);
       this.authenticatedUser.next(null);
       localStorage.removeItem('authUser');
@@ -48,13 +48,21 @@ export class AuthService {
   autoLogin() {
     const storedUser: string = localStorage.getItem('authUser');
     if (storedUser) {
-      const authUser: AuthUser = JSON.parse(storedUser);
+      const authUser: AuthUser = this.castJSONtoAuthUser(JSON.parse(storedUser));
       if (authUser.token) {
         const expirationDuration: number = authUser.expirationDate.getTime() - new Date().getTime();
         this.authenticatedUser.next(authUser);
         this.autoLogout(expirationDuration);
       }
     }
+  }
+
+  private castJSONtoAuthUser(parsedJson: any): AuthUser {
+    return new AuthUser(
+      parsedJson.userId,
+      parsedJson._token,
+      parsedJson._expireDateStr
+    );
   }
 
   private autoLogout(expirationDuration: number) {
