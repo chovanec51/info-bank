@@ -1,8 +1,9 @@
 import { NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../shared/services/auth.service';
 import { Subscription } from 'rxjs';
+import { InfoService } from '../shared/services/info.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,10 +13,10 @@ import { Subscription } from 'rxjs';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  isLoggedIn = false;
+  isLoggedIn: boolean = false;
   private userSubscription: Subscription;
 
-  constructor(private authService: AuthService, private router: Router){}
+  constructor(private authService: AuthService, private router: Router, private infoService: InfoService){}
 
   ngOnInit(): void {
     this.userSubscription = this.authService.authenticatedUser.subscribe({
@@ -29,8 +30,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.userSubscription.unsubscribe();
   }
 
-  onSearch() {
-    console.log("search");
+  onSearch(searchValue: string) {
+    this.infoService.searchParam.next(searchValue);
   }
 
   onAuthenticate() {

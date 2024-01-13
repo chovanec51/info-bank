@@ -5,6 +5,7 @@ import { AuthResponse } from '../models/auth-response.model';
 import { AuthRequest } from '../models/auth-request.model';
 import { AuthUser } from '../models/auth-user.model';
 import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthService {
   authenticatedUser: BehaviorSubject<AuthUser> = new BehaviorSubject(null);
   private _logoutTimeout: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   login(email: string, password: string) {
     const request: AuthRequest = {
@@ -42,6 +43,7 @@ export class AuthService {
       clearTimeout(this._logoutTimeout);
       this.authenticatedUser.next(null);
       localStorage.removeItem('authUser');
+      this.router.navigate(['/home']);
     }
   }
 

@@ -1,5 +1,5 @@
 <div clas="main-container">
-    <div *ngFor="let infoItem of infoItemList; index as i" 
+    <div *ngFor="let infoItem of filteredItemList; index as i" 
         [ngClass]="{'left-container': i % 2 === 0,
                     'right-container': i % 2 === 1}">
         <app-info-panel 

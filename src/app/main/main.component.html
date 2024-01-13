@@ -1,7 +1,7 @@
 <div clas="main-container">
     <div class="left-container">
         <app-info-panel 
-            *ngFor="let infoItem of infoItemList; index as i" 
+            *ngFor="let infoItem of filteredItemList; index as i" 
             [infoItem]="infoItem"
             [index]="i">
         </app-info-panel>

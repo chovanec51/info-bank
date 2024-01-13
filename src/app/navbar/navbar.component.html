@@ -18,10 +18,15 @@
             </ul>
             <form class="me-3" style="width: 30%;">
                 <div class="input-group">
-                    <span class="input-group-text clickable" id="basic-addon1" (click)="onSearch()">
+                    <span class="input-group-text clickable" id="basic-addon1" (click)="onSearch(search.value)">
                         <i class="bi bi-search"></i>
                     </span>
-                    <input type="text" class="form-control" placeholder="Názov" aria-describedby="basic-addon1">                
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        placeholder="Názov" 
+                        #search 
+                        aria-describedby="basic-addon1">                
                 </div>
             </form>
             <div class="navbar-nav me-1 mb-2 mb-lg-0">

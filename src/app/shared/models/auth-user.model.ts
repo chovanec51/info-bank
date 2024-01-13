@@ -13,7 +13,7 @@ export class AuthUser {
     }
 
     get expirationDate(): Date {
-        return new Date(this._expireDateStr);
+        return new Date(+this._expireDateStr);
     }
 
 }

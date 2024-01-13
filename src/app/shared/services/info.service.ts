@@ -10,6 +10,7 @@ export class InfoService {
   private url:string = 'https://infobank-f3b8a-default-rtdb.europe-west1.firebasedatabase.app/info.json';
   infoItemSubject: Subject<InfoItem> = new Subject();
   infoFetchError: Subject<string> = new Subject();
+  searchParam: Subject<string> = new Subject();
 
   constructor(private http: HttpClient) {}
 
