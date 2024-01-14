@@ -1,3 +1,4 @@
+<app-spinner *ngIf="isLoading"></app-spinner>
 <form [formGroup]="form" (ngSubmit)="onCreate()">
     <div class="form-group mb-3">
         <label for="topic" class="form-label">Téma</label>
@@ -40,5 +41,4 @@
         <button type="submit" class="btn btn-success" [disabled]="form.invalid">Uložiť</button>
         <button *ngIf="isInEditMode" type="button" class="btn btn-warning" (click)="this.closeEditMode.emit(null)" >Späť</button>
     </div>
-    
 </form>

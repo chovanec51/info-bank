@@ -6,11 +6,12 @@ import { InfoService } from '../shared/services/info.service';
 import { InfoItem } from '../shared/models/info-item.model';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { SpinnerComponent } from '../shared/spinner/spinner.component';
 
 @Component({
   selector: 'app-info-create',
   standalone: true,
-  imports: [ReactiveFormsModule, NgFor, NgIf, CKEditorModule],
+  imports: [ReactiveFormsModule, NgFor, NgIf, CKEditorModule, SpinnerComponent],
   templateUrl: './info-create.component.html',
   styleUrl: './info-create.component.css'
 })
@@ -22,6 +23,7 @@ export class InfoCreateComponent implements OnInit {
   topics_cl = TOPIC_CHOICE_LIST;
   topicsList = TOPIC_LIST;
   editor = ClassicEditor;
+  isLoading = false;
   
   constructor(private infoService: InfoService, private fb: FormBuilder) {
     this.form = fb.group({
@@ -39,15 +41,18 @@ export class InfoCreateComponent implements OnInit {
   }
 
   onCreate() { 
+    this.isLoading = true;
     if (this.isInEditMode) {
       this.infoService.edit(this.getFormInfoItem()).subscribe({
         next: updatedInfoItem => {
+          this.isLoading = false;
           this.closeEditMode.emit(updatedInfoItem);
         }
       });
     }
     else {
       this.infoService.create(this.getFormInfoItem());
+      this.isLoading = false;
       this.form.reset();
       this.form.patchValue({
         topic: this.topicsList[0]
