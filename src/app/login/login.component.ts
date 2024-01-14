@@ -36,19 +36,21 @@ export class LoginComponent implements OnInit, OnDestroy {
   onLogin(form: NgForm) {
     this.isLoading = true;
     const redirectTo = this.route.snapshot.queryParams['redirectTo'];
-    
-    this.authService.login(form.value.email, form.value.password).subscribe({
-      next: response => {
-        this.isLoading = false;
-        if (redirectTo) {
-          this.router.navigate([redirectTo]);
+    setTimeout(() => {
+      this.authService.login(form.value.email, form.value.password).subscribe({
+        next: response => {
+          this.isLoading = false;
+          if (redirectTo) {
+            this.router.navigate([redirectTo]);
+          }
+        },
+        error: err => {
+          this.isLoading = false;
+          this.infoService.infoFetchError.next(err);
         }
-      },
-      error: err => {
-        this.isLoading = false;
-        this.infoService.infoFetchError.next(err);
-      }
-    });
+      });
+    }, 2500);
+    
   }
 
   ngOnDestroy(): void {

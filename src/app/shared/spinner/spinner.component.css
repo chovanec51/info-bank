@@ -12,10 +12,10 @@
     content: " ";
     display: block;
     position: absolute;
-    width: 7px;
-    height: 7px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    background: #fff;
+    background: green;
     margin: -4px 0 0 -4px;
   }
   .lds-roller div:nth-child(1) {
@@ -82,13 +82,9 @@
       transform: rotate(360deg);
     }
   }
-  .backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.75);
-    z-index: 50;
-  }
   
+  .center {
+    display: grid;
+    place-items: center;
+    height: 80%;
+  }
