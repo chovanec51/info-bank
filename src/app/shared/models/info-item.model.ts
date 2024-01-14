@@ -4,6 +4,6 @@ export class InfoItem {
         public header: string,
         public content: string,
         public summary: string,
-        public id?: string
+        public dbId?: string,
     ){}
 }

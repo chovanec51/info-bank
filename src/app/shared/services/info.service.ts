@@ -7,7 +7,7 @@ import { InfoItem } from '../models/info-item.model';
   providedIn: 'root'
 })
 export class InfoService {
-  private url:string = 'https://infobank-f3b8a-default-rtdb.europe-west1.firebasedatabase.app/info.json';
+  private url:string = 'https://infobank-f3b8a-default-rtdb.europe-west1.firebasedatabase.app/info';
   infoItemSubject: BehaviorSubject<InfoItem> = new BehaviorSubject(null);
   infoFetchError: Subject<string> = new Subject();
   searchParam: Subject<string> = new Subject();
@@ -15,7 +15,21 @@ export class InfoService {
   constructor(private http: HttpClient) {}
 
   create(infoItem: InfoItem) {
-    this.http.post<{name: string}>(this.url, infoItem)
+    this.http.post<{name: string}>(this.url+'.json', infoItem)
+      .pipe(
+        catchError((err: any) => {
+          return this.handleError(err);
+        })
+      )
+      .subscribe({
+        next: value => {
+          console.log(value);
+        }
+      });
+  }
+
+  edit(infoItem: InfoItem) {
+    this.http.patch(this.url+'/'+infoItem.dbId+'.json', infoItem)
       .pipe(
         catchError((err: any) => {
           return this.handleError(err);
@@ -29,7 +43,7 @@ export class InfoService {
   }
 
   getAll(): Observable<InfoItem[]> {
-    return this.http.get(this.url)
+    return this.http.get(this.url+'.json')
       .pipe(
         catchError((err: any) => {
           return this.handleError(err);
@@ -46,7 +60,7 @@ export class InfoService {
   }
 
   getByTopic(topic: string): Observable<InfoItem[]> {
-    return this.http.get(this.url)
+    return this.http.get(this.url+'.json')
       .pipe(
         catchError((err: any) => {
           return this.handleError(err);

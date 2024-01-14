@@ -1,8 +1,18 @@
-<div *ngIf="infoItem" class="container">
-    <h4>{{infoItem.header}}</h4>
-    <h6>{{topic_cl[infoItem.topic]}}</h6>
-    <hr>
-    <span [innerHTML]="infoItem.content"></span>
-    <hr>
-    <p>{{infoItem.summary}}</p>
+<div *ngIf="infoItem" class="detail-container">
+    <div *ngIf="!isInEditMode; else editMode">
+        <div class="header-container">
+            <h4>{{infoItem.header}}</h4>
+            <button *ngIf="allowEditMode" class="btn btn-warning" type="button" (click)="onEditSwitch()">
+                <i class="bi bi-gear"></i>
+            </button>
+        </div>
+        <h6>{{topic_cl[infoItem.topic]}}</h6>
+        <hr>
+        <span [innerHTML]="infoItem.content"></span>
+        <hr>
+        <p>{{infoItem.summary}}</p>
+    </div>
+    <ng-template #editMode>
+        <app-info-create [infoItem]="infoItem" [isInEditMode]="true" (onEditModeClose)="onEditSwitch()"></app-info-create>
+    </ng-template>
 </div>
