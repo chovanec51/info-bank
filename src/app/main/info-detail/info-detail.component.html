@@ -13,6 +13,6 @@
         <p>{{infoItem.summary}}</p>
     </div>
     <ng-template #editMode>
-        <app-info-create [infoItem]="infoItem" [isInEditMode]="true" (onEditModeClose)="onEditSwitch()"></app-info-create>
+        <app-info-create [infoItem]="infoItem" [isInEditMode]="true" (onEditModeClose)="onEditSwitch($event)"></app-info-create>
     </ng-template>
 </div>

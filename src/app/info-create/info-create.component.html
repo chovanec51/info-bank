@@ -38,7 +38,7 @@
     </div>
     <div class="button-container">
         <button type="submit" class="btn btn-success" [disabled]="form.invalid">Uložiť</button>
-        <button *ngIf="isInEditMode" type="button" class="btn btn-warning" (click)="this.closeEditMode.emit()" >Späť</button>
+        <button *ngIf="isInEditMode" type="button" class="btn btn-warning" (click)="this.closeEditMode.emit(null)" >Späť</button>
     </div>
     
 </form>

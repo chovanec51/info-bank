@@ -39,7 +39,10 @@ topic_cl = TOPIC_CHOICE_LIST;
     });
   }
 
-  onEditSwitch() {
+  onEditSwitch(updatedInfoItem: InfoItem) {
+    if (updatedInfoItem) {
+      this.infoItem = updatedInfoItem;
+    }
     this.isInEditMode = !this.isInEditMode;
   }
 

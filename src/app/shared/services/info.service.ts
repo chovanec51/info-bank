@@ -28,18 +28,13 @@ export class InfoService {
       });
   }
 
-  edit(infoItem: InfoItem) {
-    this.http.patch(this.url+'/'+infoItem.dbId+'.json', infoItem)
+  edit(infoItem: InfoItem): Observable<InfoItem> {
+    return this.http.patch<InfoItem>(this.url+'/'+infoItem.dbId+'.json', infoItem)
       .pipe(
         catchError((err: any) => {
           return this.handleError(err);
         })
-      )
-      .subscribe({
-        next: value => {
-          console.log(value);
-        }
-      });
+      );
   }
 
   getAll(): Observable<InfoItem[]> {

@@ -17,7 +17,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 export class InfoCreateComponent implements OnInit {
   @Input('infoItem') selectedItem: InfoItem;
   @Input('isInEditMode') isInEditMode: boolean = false;
-  @Output('onEditModeClose') closeEditMode = new EventEmitter<void>();
+  @Output('onEditModeClose') closeEditMode = new EventEmitter<InfoItem | null>();
   form: FormGroup;
   topics_cl = TOPIC_CHOICE_LIST;
   topicsList = TOPIC_LIST;
@@ -40,8 +40,11 @@ export class InfoCreateComponent implements OnInit {
 
   onCreate() { 
     if (this.isInEditMode) {
-      this.infoService.edit(this.getFormInfoItem());
-      this.closeEditMode.emit();
+      this.infoService.edit(this.getFormInfoItem()).subscribe({
+        next: updatedInfoItem => {
+          this.closeEditMode.emit(updatedInfoItem);
+        }
+      });
     }
     else {
       this.infoService.create(this.getFormInfoItem());
