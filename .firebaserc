@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "infobank-f3b8a": {
+      "hosting": {
+        "info-bank": [
+          "infobank-f3b8a"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "infobank-f3b8a"
+  }
+}

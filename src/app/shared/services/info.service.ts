@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, catchError, map, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, catchError, map, throwError } from 'rxjs';
 import { InfoItem } from '../models/info-item.model';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { InfoItem } from '../models/info-item.model';
 })
 export class InfoService {
   private url:string = 'https://infobank-f3b8a-default-rtdb.europe-west1.firebasedatabase.app/info.json';
-  infoItemSubject: Subject<InfoItem> = new Subject();
+  infoItemSubject: BehaviorSubject<InfoItem> = new BehaviorSubject(null);
   infoFetchError: Subject<string> = new Subject();
   searchParam: Subject<string> = new Subject();
 

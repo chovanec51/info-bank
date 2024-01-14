@@ -1,3 +1,4 @@
+<app-alert *ngIf="errorMessage.length > 0" [message]="errorMessage"></app-alert>
 <div class="container">
     <form #f="ngForm" (ngSubmit)="onLogin(f)">
         <div class="form-group mb-3">

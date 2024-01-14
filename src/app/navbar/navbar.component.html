@@ -16,7 +16,7 @@
                     <a class="nav-link" [routerLink]="['/info-create']">Admin</a>
                 </li>
             </ul>
-            <form class="me-3" style="width: 30%;">
+            <form class="me-3" style="width: 30%;" (ngSubmit)="false">
                 <div class="input-group">
                     <span class="input-group-text clickable" id="basic-addon1" (click)="onSearch(search.value)">
                         <i class="bi bi-search"></i>
@@ -26,7 +26,8 @@
                         class="form-control" 
                         placeholder="Názov" 
                         #search 
-                        aria-describedby="basic-addon1">                
+                        (keyup.enter)="onSearch(search.value)"
+                        aria-describedby="basic-addon1">              
                 </div>
             </form>
             <div class="navbar-nav me-1 mb-2 mb-lg-0">

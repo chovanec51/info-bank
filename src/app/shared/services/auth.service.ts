@@ -86,8 +86,15 @@ export class AuthService {
   }
 
   private handleError(err: any) {
-    const message = "Nastala neznáma chyba pri prihlasovaní";
+    let message = "Nastala neznáma chyba pri prihlasovaní.";
     console.log(err);
+    if (err.error?.error) {
+      switch(err.error.error.message) {
+        case "INVALID_EMAIL": 
+          message = "Prihlasovacie údaje sú nesprávne.";
+          break;
+      }
+    }
     return throwError(() => message);
   }
 }

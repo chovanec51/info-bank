@@ -5,7 +5,6 @@
             id="topic"
             name="topic"
             [(ngModel)]="defaultTopic"
-            #topic="ngModel" 
             class="form-select">
                 <option *ngFor="let topic of topicsList; index as i" 
                     [value]="topic" 
@@ -22,22 +21,18 @@
             id="header"
             name="header"
             ngModel
-            #header="ngModel"
             type="text" 
             class="form-control">
     </div>
     <div class="form-group mb-3">
-        <label for="content" class="form-label">Obsah</label>
-        <textarea 
+        <label class="form-label">Obsah</label>
+        <ckeditor 
             required
-            minlength="3"
-            rows="7"
+            [editor]="editor"
             id="content"
             name="content"
-            ngModel
-            #content="ngModel"
-            class="form-control">
-        </textarea>
+            ngModel>
+        </ckeditor>
     </div>
     <div class="form-group mb-3">
         <label for="summary" class="form-label">Súhrn</label>
@@ -48,7 +43,6 @@
             id="summary"
             name="summary"
             ngModel
-            #summary="ngModel"
             class="form-control">
         </textarea>
     </div>

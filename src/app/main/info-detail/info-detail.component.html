@@ -1,1 +1,8 @@
-<p>info-detail works!</p>
+<div *ngIf="infoItem" class="container">
+    <h4>{{infoItem.header}}</h4>
+    <h6>{{topic_cl[infoItem.topic]}}</h6>
+    <hr>
+    <span [innerHTML]="infoItem.content"></span>
+    <hr>
+    <p>{{infoItem.summary}}</p>
+</div>

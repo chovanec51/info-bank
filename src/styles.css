@@ -12,11 +12,16 @@
 }
 
 input.ng-invalid.ng-touched {
-    border: 2px red solid;
+    border: 1px salmon solid;
 }
 
 textarea.ng-invalid.ng-touched {
-    border: 2px red solid;
+    border: 1px salmon solid;
+}
+
+ckeditor.ng-invalid.ng-touched > div.ck {
+    border: 1px salmon solid;
+    border-radius: 4px;
 }
 
 .form-label {
